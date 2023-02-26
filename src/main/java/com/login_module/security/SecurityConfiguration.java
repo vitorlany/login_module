@@ -19,7 +19,7 @@ public class SecurityConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     public UserDetailsService userConfig() {
         BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -35,7 +35,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain routesConfig(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .anyRequest().hasRole("USER")
                 )
                 .httpBasic(withDefaults())
